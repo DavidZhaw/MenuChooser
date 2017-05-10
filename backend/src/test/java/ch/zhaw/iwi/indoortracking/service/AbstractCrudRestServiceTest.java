@@ -24,12 +24,12 @@ import org.junit.Test;
 import com.google.common.io.CharStreams;
 import com.google.gson.reflect.TypeToken;
 
+import ch.zhaw.iwi.alcoholtester.model.project.AbstractEntity;
+import ch.zhaw.iwi.alcoholtester.server.json.JsonHelper;
+import ch.zhaw.iwi.alcoholtester.service.AbstractCrudDatabaseService;
+import ch.zhaw.iwi.alcoholtester.service.AbstractCrudRestService;
+import ch.zhaw.iwi.alcoholtester.service.PathListEntry;
 import ch.zhaw.iwi.indoortracking.AbstractDatabaseUnitTest;
-import ch.zhaw.iwi.iwitask.model.project.AbstractEntity;
-import ch.zhaw.iwi.iwitask.server.json.JsonHelper;
-import ch.zhaw.iwi.iwitask.service.AbstractCrudDatabaseService;
-import ch.zhaw.iwi.iwitask.service.AbstractCrudRestService;
-import ch.zhaw.iwi.iwitask.service.PathListEntry;
 
 public abstract class AbstractCrudRestServiceTest<E extends AbstractEntity, KEYTYPE> extends AbstractDatabaseUnitTest {
 

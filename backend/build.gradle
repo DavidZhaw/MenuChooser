@@ -22,13 +22,13 @@ sourceSets {
 
 jar {
   manifest {
-    attributes 'Main-Class': 'ch.zhaw.iwi.iwitask.Main'
+    attributes 'Main-Class': 'ch.zhaw.iwi.alcoholtester.Main'
   }
   from {
     configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
   }
 }
-mainClassName = 'ch.zhaw.iwi.iwitask.Main'
+mainClassName = 'ch.zhaw.iwi.alcoholtester.Main'
 
 jpaModelgen {
   library = "org.hibernate:hibernate-jpamodelgen:5.2.2.Final"

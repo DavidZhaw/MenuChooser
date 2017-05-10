@@ -6,7 +6,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import ch.zhaw.iwi.iwitask.service.DateUtility;
+import ch.zhaw.iwi.alcoholtester.service.DateUtility;
 
 
 public class DateUtilityTest {

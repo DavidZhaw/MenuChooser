@@ -9,9 +9,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import ch.zhaw.iwi.alcoholtester.model.project.AbstractEntity;
+import ch.zhaw.iwi.alcoholtester.service.AbstractCrudDatabaseService;
 import ch.zhaw.iwi.indoortracking.AbstractDatabaseUnitTest;
-import ch.zhaw.iwi.iwitask.model.project.AbstractEntity;
-import ch.zhaw.iwi.iwitask.service.AbstractCrudDatabaseService;
 
 
 public abstract class AbstractCrudDatabaseServiceTest<E extends AbstractEntity, KEYTYPE> extends AbstractDatabaseUnitTest {

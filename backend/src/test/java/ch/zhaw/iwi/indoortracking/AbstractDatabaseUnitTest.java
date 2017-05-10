@@ -2,7 +2,7 @@ package ch.zhaw.iwi.indoortracking;
 
 import org.junit.BeforeClass;
 
-import ch.zhaw.iwi.iwitask.server.Database;
+import ch.zhaw.iwi.alcoholtester.server.Database;
 
 public abstract class AbstractDatabaseUnitTest extends AbstractUnitTest {
 

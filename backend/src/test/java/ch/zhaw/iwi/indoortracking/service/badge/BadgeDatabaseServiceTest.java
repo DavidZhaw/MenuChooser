@@ -1,8 +1,8 @@
 package ch.zhaw.iwi.indoortracking.service.badge;
 
+import ch.zhaw.iwi.alcoholtester.model.project.Project;
+import ch.zhaw.iwi.alcoholtester.service.project.ProjectDatabaseService;
 import ch.zhaw.iwi.indoortracking.service.AbstractCrudDatabaseServiceTest;
-import ch.zhaw.iwi.iwitask.model.project.Project;
-import ch.zhaw.iwi.iwitask.service.project.ProjectDatabaseService;
 
 public class BadgeDatabaseServiceTest extends AbstractCrudDatabaseServiceTest<Project, Long> {
 	
