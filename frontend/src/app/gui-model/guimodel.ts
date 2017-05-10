@@ -2,7 +2,7 @@ export class GuiModel {
 
     private _guiModel = {
         "application": {
-            "title": "IWI Task",
+            "title": "Alcohol Tester",
             "formList": [
                 {
                     "id": "OwnUserForm",
