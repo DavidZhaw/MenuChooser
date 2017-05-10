@@ -1,0 +1,24 @@
+Heroku
+******
+
+Einrichtung
+- heroku create assessment-prototype
+- heroku scale web=1
+- use Heroku PORT variable for Spark Java Port
+- Deployment: git push heroku master
+- Logs: heroku logs
+
+Betrieb
+- Error R14 bedeutet nur, dass die Quota überschritten wurde. 2x Quota ist erlaubt.
+- Neustart: heroku restart
+- Logs heroku logs -t
+
+Postgresql Datenbank
+- DB resetten: heroku pg:reset DATABASE
+- DB Remote Connection: ssl=true, sslfactory=org.postgresql.ssl.NonValidatingFactory
+
+Change Remote
+- heroku apps:info
+- git remote rm heroku
+- git remote add heroku https://git.heroku.com/assessment-backend-***.git
+- heroku apps:info

@@ -1,0 +1,63 @@
+plugins {
+	id 'java'
+	id "at.comm_unity.gradle.plugins.jpamodelgen" version "1.1.1"
+	id 'application'
+}
+
+repositories {
+    jcenter()
+}
+
+task stage {
+  dependsOn build
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs "src/main/resources", "frontend"
+        }
+    }
+}
+
+jar {
+  manifest {
+    attributes 'Main-Class': 'ch.zhaw.iwi.iwitask.Main'
+  }
+  from {
+    configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+  }
+}
+mainClassName = 'ch.zhaw.iwi.iwitask.Main'
+
+jpaModelgen {
+  library = "org.hibernate:hibernate-jpamodelgen:5.2.2.Final"
+  jpaModelgenSourcesDir = "src/main/java"
+}
+
+compileJava.options.compilerArgs += ["-proc:none"]
+
+dependencies {
+	compile 'org.slf4j:slf4j-simple:1.7.21'
+	compile 'org.slf4j:slf4j-log4j12:1.7.21'
+    compile 'org.hibernate:hibernate-core:5.2.2.Final'
+	compile 'org.hibernate:hibernate-jpamodelgen:5.2.2.Final'
+	compile 'org.hibernate:hibernate-c3p0:5.2.2.Final'
+	compile 'com.sparkjava:spark-core:2.5'
+	compile 'com.google.code.gson:gson:2.7'
+	compile 'com.h2database:h2:1.4.192'
+	compile 'org.postgresql:postgresql:9.4.1211'
+	compile 'com.google.inject:guice:4.1.0'
+	compile 'com.google.inject.extensions:guice-persist:4.1.0'
+	compile 'org.apache.poi:poi:3.14'
+	compile 'org.apache.poi:poi-ooxml:3.14'
+	compile 'io.jsonwebtoken:jjwt:0.6.0'
+	compile 'com.google.guava:guava:19.0'
+    
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.apache.httpcomponents:httpclient:4.5.2'
+}
+
+configurations.all {
+       exclude group: 'org.slf4j', module: 'slf4j-simple'
+}
