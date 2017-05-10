@@ -2,45 +2,27 @@ package ch.zhaw.iwi.alcoholtester;
 
 import static spark.Spark.before;
 import static spark.Spark.get;
+import static spark.Spark.post;
 import static spark.Spark.staticFiles;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Properties;
 
-import org.hibernate.dialect.PostgreSQL95Dialect;
-import org.postgresql.Driver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.persist.jpa.JpaPersistModule;
-
 import ch.zhaw.iwi.alcoholtester.server.CorsHeaders;
-import ch.zhaw.iwi.alcoholtester.server.Database;
-import ch.zhaw.iwi.alcoholtester.service.exception.ExceptionRestService;
-import ch.zhaw.iwi.alcoholtester.service.person.MonthlyRestService;
-import ch.zhaw.iwi.alcoholtester.service.person.PersonRestService;
-import ch.zhaw.iwi.alcoholtester.service.project.ProjectRestService;
-import ch.zhaw.iwi.alcoholtester.service.task.TaskRestService;
-import ch.zhaw.iwi.alcoholtester.service.user.UserRestService;
-import ch.zhaw.iwi.alcoholtester.service.work.WorkRestService;
+import ch.zhaw.iwi.alcoholtester.server.json.JsonHelper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import spark.Spark;
 
 public class Main {
 	private static final String HEROKU_PORT = "PORT";
-	private static final JpaPersistModule persistModule = new JpaPersistModule("AssessmentTool");
 	private static final Logger logger = LoggerFactory.getLogger(Main.class);
-	private static Injector injector;
 
 	public static void main(String[] args) {
 		initFrontend();
-		initDatabase();
 		initServer();
 
 		// Cache
@@ -61,15 +43,23 @@ public class Main {
 		});
 
 		// Services
-		injector.getInstance(UserRestService.class).init();
-		injector.getInstance(ProjectRestService.class).init();
-		injector.getInstance(PersonRestService.class).init();
-		injector.getInstance(TaskRestService.class).init();
-		injector.getInstance(WorkRestService.class).init();
-		injector.getInstance(MonthlyRestService.class).init();
-
-		// Exception (must be last)
-		injector.getInstance(ExceptionRestService.class).init();
+		// Login
+		post("services/login", (req, res) -> {
+			CredentialView credentialView = new JsonHelper().fromJson(req.body(), CredentialView.class);
+			String username = credentialView.username;
+			String password = credentialView.password;
+			LoginView result = new LoginView();
+			if (username.equalsIgnoreCase("ad") && password.equalsIgnoreCase("iop")) {
+				String jwtString = JwtUtility.createJsonWebToken(username, "en");
+				res.header("Authorization", jwtString);
+				result.jwt = jwtString;
+				result.languageCode = "en";
+			} else {
+				logger.info("Login denied with user " + username);
+				Spark.halt(401, "Wrong user/pw");
+			}
+			return result;
+		}, new JsonHelper().getJsonTransformer()); // TODO
 
 		logger.info("server ready and listening for requests");
 	}
@@ -88,33 +78,6 @@ public class Main {
 		}
 	}
 
-	private static void initDatabase() {
-		Properties properties = new Properties();
-		ProcessBuilder processBuilder = new ProcessBuilder();
-		if (processBuilder.environment().get(HEROKU_PORT) != null) {
-			try {
-				URI dbUri = new URI(System.getenv("DATABASE_URL"));
-			    String username = dbUri.getUserInfo().split(":")[0];
-			    String password = dbUri.getUserInfo().split(":")[1];
-			    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-			    
-				properties.put("javax.persistence.jdbc.driver", Driver.class.getName());
-				properties.put("javax.persistence.jdbc.url", dbUrl);
-				properties.put("javax.persistence.jdbc.user", username);
-				properties.put("javax.persistence.jdbc.password", password);
-				properties.put("hibernate.dialect", PostgreSQL95Dialect.class.getName());
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
-				System.out.println("Database not found");
-				System.exit(1);
-			}
-		}
-		persistModule.properties(properties);
-		injector = Guice.createInjector(persistModule);
-		
-		injector.getInstance(Database.class).init("9998", "9999", true);
-	}
-
 	public static void initServer() {
 		Spark.port(getHerokuAssignedPort());
 		CorsHeaders.init();
@@ -127,4 +90,16 @@ public class Main {
 		}
 		return 4567; // return default port if heroku-port isn't set (i.e. on localhost)
 	}
+	
+	private static class CredentialView {
+		private String username;
+		private String password;
+	}
+
+	@SuppressWarnings("unused")
+	private static class LoginView {
+		private String jwt;
+		private String languageCode;
+	}
+	
 }
