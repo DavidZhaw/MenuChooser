@@ -22,7 +22,7 @@ export class AlcoholTesterAppComponent extends path.PathAppComponent {
     }
 
     protected getFrontendVersion():string {
-        return "0.0.6-SNAPSHOT";
+        return "0.1.0-SNAPSHOT";
     }
 
     protected getStartPage():string {
