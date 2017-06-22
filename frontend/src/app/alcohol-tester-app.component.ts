@@ -45,10 +45,8 @@ export class AlcoholTesterAppComponent extends path.PathAppComponent {
     }
 
     public getBackendUrl() {
-        if (window.location.hostname.indexOf("dev.herokuapp") != -1) {
-            return "http://iwitask-dev.herokuapp.com/services";
-        } else if (window.location.hostname.indexOf("test.herokuapp") != -1) {
-            return "http://iwitask-test.herokuapp.com/services";
+        if (window.location.hostname.indexOf("herokuapp") != -1) {
+            return "https://alcoholtester.herokuapp.com/services";
         }
         return "http://localhost:4567/services";
     }
