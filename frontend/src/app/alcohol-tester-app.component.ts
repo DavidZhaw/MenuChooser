@@ -5,15 +5,15 @@ import * as path from "path-framework/app/path-framework/path";
 /* model imports */
 import {GuiModel} from './gui-model/guimodel';
 import {TranslationService} from "path-framework/app/path-framework/service/translation.service";
-import {IwiTaskTranslationService} from "./task-translation-service";
+import {AlcoholTesterTranslationService} from "./alcohol-tester-translation-service";
 
 @Component({
     selector: 'path-application',
     templateUrl: './../../node_modules/path-framework/app/path-framework/path-app.component.html',
     // providers: [{ provide: path.PathService, useClass: path.PathMockService }]
-    providers: [path.PathService, { provide: TranslationService, useClass: IwiTaskTranslationService }]
+    providers: [path.PathService, { provide: TranslationService, useClass: AlcoholTesterTranslationService }]
 })
-export class IwiTaskAppComponent extends path.PathAppComponent {
+export class AlcoholTesterAppComponent extends path.PathAppComponent {
 
     private _appConfig = new GuiModel();
 

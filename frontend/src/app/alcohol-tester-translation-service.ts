@@ -2,10 +2,10 @@ import {Injectable} from "@angular/core";
 import {TranslationService} from "path-framework/app/path-framework/service/translation.service"
 
 @Injectable()
-export class IwiTaskTranslationService extends TranslationService {
+export class AlcoholTesterTranslationService extends TranslationService {
 
     protected getTranslation(key:string) : string {
-        let myTranslations = this.createTranslationMap(this.getIwiTaskTranslations());
+        let myTranslations = this.createTranslationMap(this.getAlcoholTesterTranslations());
         // prefer custom translations
         if (myTranslations.get(key) == null) {
             return super.getTranslation(key);
@@ -13,7 +13,7 @@ export class IwiTaskTranslationService extends TranslationService {
         return myTranslations.get(key);
     }
 
-    private getIwiTaskTranslations() {
+    private getAlcoholTesterTranslations() {
         let languageCode: string = this.getUserLanguage();
 
         // put additional application translations here

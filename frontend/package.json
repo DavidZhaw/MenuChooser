@@ -28,7 +28,7 @@
     "heroku-postbuild": "ng build"
   },
   "dependencies": {
-    "path-framework": "0.2.2"
+    "path-framework": "0.2.3"
   },
   "devDependencies": {
     "@angular/cli": "1.0.0-rc.0",

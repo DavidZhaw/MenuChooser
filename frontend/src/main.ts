@@ -1,4 +1,4 @@
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {IwiTaskAppModule} from './app/task-app.module';
+import {AlcoholTesterAppModule} from "./app/alocohol-tester-app.module";
 
-platformBrowserDynamic().bootstrapModule(IwiTaskAppModule);
+platformBrowserDynamic().bootstrapModule(AlcoholTesterAppModule);
