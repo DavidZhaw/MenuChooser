@@ -32,7 +32,7 @@ public class Bier extends Getraenk {
 
 		System.out.println("\nBier: " + b.getAlcTotal());
 		System.out.println("Wein: " + w.getAlcTotal());
-		System.out.println("Likör: " + l.getAlcTotal());
+		System.out.println("LikÃ¶r: " + l.getAlcTotal());
 		System.out.println("Schnaps: " + s.getAlcTotal());
 	}
 }

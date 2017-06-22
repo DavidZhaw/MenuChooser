@@ -17,7 +17,7 @@ public class AlkServices {
 	private JsonTransformer jsonTransformer = new JsonHelper().getJsonTransformer();
 
 	public void init() {
-		// GUI benötigt immer eine Person
+		// GUI benÃ¶tigt immer eine Person
 		alkTest.setPerson(50, true);
 
 		// Person abrufen
@@ -53,15 +53,15 @@ public class AlkServices {
 				}
 			}
 
-			result.add(createButton(Bier.class.getSimpleName(), bierCount + " Gläser", "/konsum/add/0"));
-			result.add(createButton(Wein.class.getSimpleName(), weinCount + " Gläser", "/konsum/add/1"));
-			result.add(createButton(Likoer.class.getSimpleName(), likoerCount + " Gläser", "/konsum/add/2"));
-			result.add(createButton(Schnaps.class.getSimpleName(), schnapsCount + " Gläser", "/konsum/add/3"));
+			result.add(createButton(Bier.class.getSimpleName(), bierCount + " GlÃ¤ser", "/konsum/add/0"));
+			result.add(createButton(Wein.class.getSimpleName(), weinCount + " GlÃ¤ser", "/konsum/add/1"));
+			result.add(createButton(Likoer.class.getSimpleName(), likoerCount + " GlÃ¤ser", "/konsum/add/2"));
+			result.add(createButton(Schnaps.class.getSimpleName(), schnapsCount + " GlÃ¤ser", "/konsum/add/3"));
 
 			return result;
 		}, jsonTransformer);
 
-		// Konsum hinzufügen
+		// Konsum hinzufÃ¼gen
 		get("services/konsum/add/:konsumId", (req, res) -> {
 			Integer konsumId = Integer.parseInt(req.params("konsumId")); // Parameter nach int konvertieren
 			alkTest.addKonsum(konsumId);
@@ -71,7 +71,7 @@ public class AlkServices {
 		// aktuellen Level abrufen
 		get("services/level", (req, res) -> {
 			List<PathListEntry<String>> buttonList = new ArrayList<>();
-			buttonList.add(createButton("Level", String.format("%.5f", alkTest.getCurrentLevel()) + " ‰", "/level"));
+			buttonList.add(createButton("Level", String.format("%.5f", alkTest.getCurrentLevel()) + " â€°", "/level"));
 			return buttonList;
 		}, jsonTransformer);
 		
@@ -83,7 +83,7 @@ public class AlkServices {
 	}
 	
 	/**
-	 * @return erzeugt einen Path Button mit Namen, Detail und (möglicher) URL
+	 * @return erzeugt einen Path Button mit Namen, Detail und (mÃ¶glicher) URL
 	 */
 	private PathListEntry<String> createButton(String name, String details, String url) {
 		PathListEntry<String> button = new PathListEntry<>();

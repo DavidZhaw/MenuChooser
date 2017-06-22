@@ -70,19 +70,19 @@ public class AlkTest {
 		
 		for (int i=0; i < konsum.size(); i++) {
 			Getraenk drink = konsum.get(i);
-			// Alkohol des neuen Getränks zu Blutalkoholgehalt addieren
+			// Alkohol des neuen GetrÃ¤nks zu Blutalkoholgehalt addieren
 			level += drink.getAlcTotal() / person.getDistribution();
 
-			// Abbau seit letztem Getränk berechnen und subtrahieren
+			// Abbau seit letztem GetrÃ¤nk berechnen und subtrahieren
 			double abbaurateProSekunde = 0.15d / secondsOfHour;
 			if (i != konsum.size() - 1) {
-				// alle Getränke ausser letztes Getränk
+				// alle GetrÃ¤nke ausser letztes GetrÃ¤nk
 				Getraenk nextDrink = konsum.get(i + 1);
-				// Zeit zwischen Getränken berechnen
+				// Zeit zwischen GetrÃ¤nken berechnen
 				double deltaSec = (nextDrink.getTimeMilli() - drink.getTimeMilli()) / 1000d;
 				level -= abbaurateProSekunde * deltaSec;
 			} else {
-				// letztes Getränk, vergangene Zeit berechnen
+				// letztes GetrÃ¤nk, vergangene Zeit berechnen
 				double deltaSec = drink.getDiffSecond();
 				level -= abbaurateProSekunde * deltaSec;
 			}
