@@ -65,9 +65,11 @@ public class Main {
 			return result;
 		}, new JsonHelper().getJsonTransformer()); // TODO
 
+		// Unsere Alkohol Tester Services
 		AlkServices alkServices = new AlkServices();
 		alkServices.init();
 
+		// Exception Handler
 		exception(Exception.class, (exception, request, response) -> {
 			response.status(500);
 			StringWriter errors = new StringWriter();

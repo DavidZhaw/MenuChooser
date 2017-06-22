@@ -6,7 +6,7 @@ export class GuiModel {
             "formList": [
                 {
                     "id": "OwnUserForm",
-                    "title": "Not implemented",
+                    "title": "NotImplemented",
                     "formFieldList": [
                         {
                             "type": "okButton",
@@ -22,7 +22,7 @@ export class GuiModel {
                         {
                             "id": "weight",
                             "type": "number",
-                            "name": "Gewicht",
+                            "name": "Weight",
                             "width": 2,
                             "min": 1,
                             "max": 999,
@@ -32,7 +32,7 @@ export class GuiModel {
                         {
                             "id": "isFemale",
                             "type": "RadioGroupField",
-                            "name": "Geschlecht",
+                            "name": "Sex",
                             "defaultKey": false,
                             "radios": [{
                                 type: "radio",
@@ -91,7 +91,7 @@ export class GuiModel {
                         {
                             "type": "button",
                             "name": "Reset",
-                            "icon": "fa-book",
+                            "icon": "fa-trash",
                             "color": "red",
                             "url": "/reset",
                         },
