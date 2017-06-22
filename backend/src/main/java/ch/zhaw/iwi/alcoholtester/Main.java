@@ -11,6 +11,7 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ch.zhaw.iwi.alcoholtester.backend.AlkServices;
 import ch.zhaw.iwi.alcoholtester.server.CorsHeaders;
 import ch.zhaw.iwi.alcoholtester.server.json.JsonHelper;
 import io.jsonwebtoken.Claims;
@@ -39,7 +40,7 @@ public class Main {
 			if (jwt != null) {
 				userId = jwt.getBody().getSubject();
 			}
-			return "{ \"status\": \"ok\", \"userId\": \"" + (userId == null ? "" : userId) + "\", \"version\": \"" + new Version().getVersion() + "\"}";
+			return "{ \"status\": \"ok\", \"userId\": \"" + (userId == null ? "alcoholtester" : userId) + "\", \"version\": \"" + new Version().getVersion() + "\"}";
 		});
 
 		// Services
@@ -61,6 +62,9 @@ public class Main {
 			return result;
 		}, new JsonHelper().getJsonTransformer()); // TODO
 
+		AlkServices alkServices = new AlkServices();
+		alkServices.init();
+		
 		logger.info("server ready and listening for requests");
 	}
 
