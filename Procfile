@@ -1,1 +1,1 @@
-web: backend/.jdk/bin/java -Xmx300m -Xms300m -Xmn20m -Xss256k -XX:MaxMetaspaceSize=120m -XX:MaxDirectMemorySize=5m -Dfile.encoding=UTF-8 -cp backend/build/libs/iwitask.jar ch.zhaw.iwi.iwitask.Main
+web: backend/.jdk/bin/java -Xmx300m -Xms300m -Xmn20m -Xss256k -XX:MaxMetaspaceSize=120m -XX:MaxDirectMemorySize=5m -Dfile.encoding=UTF-8 -cp backend/build/libs/alcoholtester.jar ch.zhaw.iwi.alcoholtester.Main

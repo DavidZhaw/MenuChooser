@@ -27,7 +27,7 @@ public class AlkServices {
 
 		// Person aktualisieren
 		put("services/person/:personId", (req, res) -> {
-			Person person = new JsonHelper().fromJson(req.body(), Person.class);
+			Person person = new JsonHelper().fromJson(req.body(), Person.class); // Json nach Person transformieren
 			alkTest.setPerson(person.getWeight(), person.isFemale());
 			return true;
 		}, jsonTransformer);
@@ -63,7 +63,7 @@ public class AlkServices {
 
 		// Konsum hinzufügen
 		get("services/konsum/add/:konsumId", (req, res) -> {
-			Integer konsumId = Integer.parseInt(req.params("konsumId"));
+			Integer konsumId = Integer.parseInt(req.params("konsumId")); // Parameter nach int konvertieren
 			alkTest.addKonsum(konsumId);
 			return true;
 		}, jsonTransformer);
