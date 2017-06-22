@@ -1,12 +1,15 @@
 package ch.zhaw.iwi.alcoholtester;
 
 import static spark.Spark.before;
+import static spark.Spark.exception;
 import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +67,14 @@ public class Main {
 
 		AlkServices alkServices = new AlkServices();
 		alkServices.init();
-		
+
+		exception(Exception.class, (exception, request, response) -> {
+			response.status(500);
+			StringWriter errors = new StringWriter();
+			exception.printStackTrace(new PrintWriter(errors));
+			exception.printStackTrace();
+		});
+
 		logger.info("server ready and listening for requests");
 	}
 
@@ -94,7 +104,7 @@ public class Main {
 		}
 		return 4567; // return default port if heroku-port isn't set (i.e. on localhost)
 	}
-	
+
 	private static class CredentialView {
 		private String username;
 		private String password;
@@ -105,5 +115,5 @@ public class Main {
 		private String jwt;
 		private String languageCode;
 	}
-	
+
 }
