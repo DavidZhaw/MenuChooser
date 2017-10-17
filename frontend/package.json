@@ -28,11 +28,11 @@
     "heroku-postbuild": "ng build"
   },
   "dependencies": {
-    "path-framework": "0.2.3"
+    "path-framework": "0.2.6"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.0-rc.0",
-    "@angular/compiler-cli": "^2.4.0",
+    "@angular/cli": "1.2.0",
+    "@angular/compiler-cli": "4.2.5",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
@@ -49,6 +49,6 @@
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.4.2",
-    "typescript": "2.1.4"
+    "typescript": "2.1.5"
   }
 }
