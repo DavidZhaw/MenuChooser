@@ -17,29 +17,64 @@ public class MenuChooserServices {
 
 	public void init() {
 		
-		String [] menues = {"Apfel", "Birne", "Tomate"};
-		int [] votes = new int[menues.length];
+		String [] menus = {"Apfel", "Birne", "Tomate"};
+		int [] votes = new int[menus.length];
+		
+		
+		get("services/getmenus", (req, res) -> {		
+			List<PathListEntry<String>> menuButtons = new ArrayList<>();
+			for (int i=0; i<menus.length; i++) {
+				menuButtons.add(createButton(menus[i], votes[i] + " Likes", "/setvote/"+i));
+			}
+			return menuButtons;
+		}, jsonTransformer);
+		
 
-		get("services/menus", (req, res) -> {
-			return menues;
+		get("services/getmenunames", (req, res) -> {
+			return menus;
+		}, jsonTransformer);
+		
+		get("services/getvotes", (req, res) -> {
+			return votes;
+		}, jsonTransformer);
+		
+		get("services/setmenuname/:menuNo/:menuName", (req, res) -> {
+			int menuNumber = Integer.parseInt(req.params("menuNo"));	
+			String menuName = req.params("menuName");	
+			if (menuNumber<menus.length) {
+				menus[menuNumber] = menuName;
+				return true;
+			}
+			return false;
+		}, jsonTransformer);
+		
+		get("services/getmenuname/:menuNo", (req, res) -> {
+			int menuNumber = Integer.parseInt(req.params("menuNo"));	
+			if (menuNumber<menus.length) {
+				return menus[menuNumber];
+			}
+			return "Empty";
 		}, jsonTransformer);
 
-		put("services/menu/:menuNo", (req, res) -> {
+		get("services/setvote/:menuNo", (req, res) -> {
 			int menuNumber = Integer.parseInt(req.params("menuNo"));	
-			if (menuNumber<menues.length) {
+			if (menuNumber<menus.length) {
 				votes[menuNumber]++;
+				
+
 				return true;
 			}
 			return false;
 		}, jsonTransformer);
 
-		get("services/menu/:menuNo", (req, res) -> {
+		get("services/getvote/:menuNo", (req, res) -> {
 			int menuNumber = Integer.parseInt(req.params("menuNo"));
-			if (menuNumber<menues.length) {
+			if (menuNumber<menus.length) {
 				return votes[menuNumber];
 			}
 			return 0;
 		}, jsonTransformer);	
+		
 	}
 	
 	/**
