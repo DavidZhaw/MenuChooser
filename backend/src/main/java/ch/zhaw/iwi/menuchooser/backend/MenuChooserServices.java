@@ -18,27 +18,39 @@ public class MenuChooserServices {
 	public void init() {
 		
 		String [] menus = {"Apfel", "Birne", "Tomate"};
+		String [] colors = {"blue","green","red","yellow","pink","purple","lime"};				
 		int [] votes = new int[menus.length];
 		
 		
 		get("services/getmenus", (req, res) -> {		
-			List<PathListEntry<String>> menuButtons = new ArrayList<>();
+			List<PathListEntry<String>> menuButtons = new ArrayList<>();		
 			for (int i=0; i<menus.length; i++) {
-				menuButtons.add(createButton(menus[i], votes[i] + " Likes", "/setvote/"+i));
+				String details = votes[i] + " Likes"; //+getStarString(i);
+				menuButtons.add(createButton(menus[i], details, colors[i%colors.length], "/vote/"+i));
 			}
 			return menuButtons;
 		}, jsonTransformer);
 		
-
-		get("services/getmenunames", (req, res) -> {
-			return menus;
+		
+		get("services/vote/:menuNo", (req, res) -> {
+			int menuNumber = Integer.parseInt(req.params("menuNo"));	
+			if (menuNumber<menus.length) {
+				votes[menuNumber]++;
+				return true;
+			}
+			return false;
 		}, jsonTransformer);
 		
-		get("services/getvotes", (req, res) -> {
-			return votes;
+		
+		get("services/admin/reset", (req, res) -> {
+			for (int i=0; i<menus.length; i++) {
+				votes[i] = 0;
+			}
+			return true;
 		}, jsonTransformer);
 		
-		get("services/setmenuname/:menuNo/:menuName", (req, res) -> {
+		
+		get("services/admin/setmenu/:menuNo/:menuName", (req, res) -> {
 			int menuNumber = Integer.parseInt(req.params("menuNo"));	
 			String menuName = req.params("menuName");	
 			if (menuNumber<menus.length) {
@@ -48,7 +60,7 @@ public class MenuChooserServices {
 			return false;
 		}, jsonTransformer);
 		
-		get("services/getmenuname/:menuNo", (req, res) -> {
+		get("services/menu/get/:menuNo", (req, res) -> {
 			int menuNumber = Integer.parseInt(req.params("menuNo"));	
 			if (menuNumber<menus.length) {
 				return menus[menuNumber];
@@ -56,37 +68,42 @@ public class MenuChooserServices {
 			return "Empty";
 		}, jsonTransformer);
 
-		get("services/setvote/:menuNo", (req, res) -> {
-			int menuNumber = Integer.parseInt(req.params("menuNo"));	
-			if (menuNumber<menus.length) {
-				votes[menuNumber]++;
-				
 
-				return true;
-			}
-			return false;
+		
+		// Debug
+		get("services/getmenunames", (req, res) -> {
+			return menus;
 		}, jsonTransformer);
-
-		get("services/getvote/:menuNo", (req, res) -> {
-			int menuNumber = Integer.parseInt(req.params("menuNo"));
-			if (menuNumber<menus.length) {
-				return votes[menuNumber];
-			}
-			return 0;
-		}, jsonTransformer);	
+		
+		// Debug
+		get("services/getvotes", (req, res) -> {
+			return votes;
+		}, jsonTransformer);
 		
 	}
 	
 	/**
 	 * @return erzeugt einen Path Button mit Namen, Detail und (möglicher) URL
 	 */
-	private PathListEntry<String> createButton(String name, String details, String url) {
+	private PathListEntry<String> createButton(String name, String details, String color, String url) {
 		PathListEntry<String> button = new PathListEntry<>();
 		button.setKey(UUID.randomUUID().toString(), "id"); // Jeder Path Button muss einen Key haben
 		button.setName(name);
+		button.setColor(color);
 		button.getDetails().add(details);
 		button.setUrl(url);
 		return button;
 	}
-
+	
+	private String getStarString(int startCount) {
+		String starstring = "<br><br>";
+		for (int i=0; i<5; i++) {
+			if (i < startCount) {
+				starstring += "&#9733;";
+			} else {
+				starstring += "&#9734;";
+			}
+		}
+		return starstring;
+	}
 }

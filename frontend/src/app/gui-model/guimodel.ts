@@ -9,17 +9,15 @@ export class GuiModel {
             "pageList": [
                 {
                     "id": "mainmenu",
-                    "name": "Proposed Menus",
+                    "name": "ProposedMenus",
                     "elementList": [
                         {
                             "type": "list",
                             "name": "Konsum List",
-                            "icon": "fa-glass",
                             "color": "purple",
                             "search": false,
                             "url": "/getmenus"
                         },
-
                     ]
                 }
             ]

@@ -19,10 +19,8 @@ export class AlcoholTesterTranslationService extends TranslationService {
         // put additional application translations here
         return {
             "NotImplemented": "Benutzerverwaltung ist nicht implementiert",
-            "Person": "Person",
             "Reset": "Reset",
-            "Weight": "Gewicht",
-            "Sex": "Geschlecht",
+            "ProposedMenus": "Proposed Menus",
         }
     }
 }
