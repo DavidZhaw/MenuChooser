@@ -1,4 +1,4 @@
-package ch.zhaw.iwi.alcoholtester.server.json;
+package ch.zhaw.iwi.menuchooser.server.json;
 
 
 import java.lang.reflect.Type;
@@ -8,7 +8,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import ch.zhaw.iwi.alcoholtester.service.PathListEntry.Key;
+import ch.zhaw.iwi.menuchooser.service.PathListEntry.Key;
 
 @SuppressWarnings("rawtypes")
 public class PathListEntryKeyAdapter implements JsonSerializer<Key> {

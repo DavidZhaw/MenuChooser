@@ -1,4 +1,4 @@
-package ch.zhaw.iwi.alcoholtester.server.json;
+package ch.zhaw.iwi.menuchooser.server.json;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

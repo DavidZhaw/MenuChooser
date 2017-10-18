@@ -1,4 +1,4 @@
-package ch.zhaw.iwi.alcoholtester.server;
+package ch.zhaw.iwi.menuchooser.server;
 
 import static spark.Spark.before;
 import static spark.Spark.options;

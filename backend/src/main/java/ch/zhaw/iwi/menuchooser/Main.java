@@ -1,4 +1,4 @@
-package ch.zhaw.iwi.alcoholtester;
+package ch.zhaw.iwi.menuchooser;
 
 import static spark.Spark.before;
 import static spark.Spark.exception;
@@ -14,9 +14,9 @@ import java.io.StringWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.zhaw.iwi.alcoholtester.backend.AlkServices;
-import ch.zhaw.iwi.alcoholtester.server.CorsHeaders;
-import ch.zhaw.iwi.alcoholtester.server.json.JsonHelper;
+import ch.zhaw.iwi.menuchooser.backend.MenuChooserServices;
+import ch.zhaw.iwi.menuchooser.server.CorsHeaders;
+import ch.zhaw.iwi.menuchooser.server.json.JsonHelper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import spark.Spark;
@@ -66,8 +66,8 @@ public class Main {
 		}, new JsonHelper().getJsonTransformer()); // TODO
 
 		// Unsere Alkohol Tester Services
-		AlkServices alkServices = new AlkServices();
-		alkServices.init();
+		MenuChooserServices menuServices = new MenuChooserServices();
+		menuServices.init();
 
 		// Exception Handler
 		exception(Exception.class, (exception, request, response) -> {

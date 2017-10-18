@@ -1,4 +1,4 @@
-package ch.zhaw.iwi.alcoholtester.service;
+package ch.zhaw.iwi.menuchooser.service;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package ch.zhaw.iwi.alcoholtester.server.json;
+package ch.zhaw.iwi.menuchooser.server.json;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
-import ch.zhaw.iwi.alcoholtester.service.PathListEntry.Key;
+import ch.zhaw.iwi.menuchooser.service.PathListEntry.Key;
 
 public class JsonHelper {
 

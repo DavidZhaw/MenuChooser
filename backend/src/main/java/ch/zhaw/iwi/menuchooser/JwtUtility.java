@@ -1,4 +1,4 @@
-package ch.zhaw.iwi.alcoholtester;
+package ch.zhaw.iwi.menuchooser;
 
 import java.security.Key;
 import java.util.Date;
